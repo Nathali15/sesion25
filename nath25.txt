@@ -1,0 +1,64 @@
+use musicavallenata;
+db.canciones.insertOne(
+    {
+    _id:1,
+    titulo: "la gota fria",
+    artista: "carlos vives",
+    autor:"emiliano zuleta",
+    album: "clasicos de la providencia",
+    anio:1993,
+    genero:"vallenato",
+    duracion: "4:25",
+    letra: "me la lleva ella me la llevo yo....",
+    reproducciones: 1500000,
+});
+db.canciones.find();
+db.canciones.insertMany([
+    {
+    _id:2,
+    titulo: "la gota fria",
+    artista: "carlos vives",
+    autor:"emiliano zuleta",
+    album: "clasicos de la providencia",
+    anio:1993,
+    genero:"vallenato",
+    duracion: "4:25",
+    letra: "me la lleva ella me la llevo yo....",
+    reproducciones: 150000,
+    },
+    {
+    _id:3,
+    titulo: "Obseción",
+    artista: "Jorge Celedon",
+    autor:"Ivan Celedon",
+    album: "Sencillo",
+    anio:2002,
+    genero:"vallenato",
+    duracion: "3:40",
+    letra: "Ya no comprendo por que no me hablas ....",
+    reproducciones: 2000000,
+    },
+]);
+db.canciones.find();
+
+db.canciones.find({anio:1993});
+db.canciones.find({reproducciones:{$gt:1800000}});
+db.canciones.find({genero: "vallenato", duracion:{$gte:"4:00"}});
+db.canciones.updateOne(
+    {_id:1},
+    {$set:{reproducciones:1600000}}
+);
+
+db.canciones.find();
+db.canciones.updateMany(
+    {genero:"vallenato"},
+    {$inc:{reproducciones:100000}}
+)
+db.canciones.find();
+
+//Eliminar un documento especifico
+//db.canciones.deleteOne({_id:1})
+//db.canciones.find();
+//Eliminar multiples documentos
+db.canciones.deleteMany({artista:"carlos vives"})
+db.canciones.find();
